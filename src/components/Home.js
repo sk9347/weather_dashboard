@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./home.css";
 
 const WeatherDashboard = () => {
-  const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // State variables for managing city input, weather data, forecast data, loading state, and errors
+  const [city, setCity] = useState(""); // City input value
+  const [weatherData, setWeatherData] = useState(null); // Current weather data
+  const [forecastData, setForecastData] = useState(null); // Forecast data
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
     // Fetch weather data for the current location when the component mounts
     fetchCurrentLocation();
-  },[]);
+  }, []);
 
+  // Function to fetch weather data for the current location using geolocation
   const fetchCurrentLocation = () => {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
@@ -28,10 +30,13 @@ const WeatherDashboard = () => {
     );
   };
 
+  // Function to fetch weather data based on latitude and longitude
   const fetchWeatherData = (latitude, longitude) => {
+    // Constructing the API URL for fetching weather data
     const API_KEY = "ccbd99297a4de0687d0b9087f218d0b9";
     const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
 
+    // Fetching weather data from the API
     fetch(API_URL)
       .then((response) => {
         if (!response.ok) {
@@ -49,10 +54,13 @@ const WeatherDashboard = () => {
       });
   };
 
+  // Function to fetch forecast data based on latitude and longitude
   const fetchForecastData = (latitude, longitude) => {
+    // Constructing the API URL for fetching forecast data
     const API_KEY = "ccbd99297a4de0687d0b9087f218d0b9";
     const API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
 
+    // Fetching forecast data from the API
     fetch(API_URL)
       .then((response) => {
         if (!response.ok) {
@@ -68,6 +76,7 @@ const WeatherDashboard = () => {
       });
   };
 
+  // Function to handle city search
   const handleSearch = () => {
     if (city.trim() !== "") {
       setError(null);
@@ -80,11 +89,14 @@ const WeatherDashboard = () => {
     }
   };
 
+  // Function to fetch weather data by city name
   const fetchWeatherDataByCity = () => {
     setIsLoading(true);
+    // Constructing the API URL for fetching weather data by city name
     const API_KEY = "ccbd99297a4de0687d0b9087f218d0b9";
     const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
 
+    // Fetching weather data from the API
     fetch(API_URL)
       .then((response) => {
         if (!response.ok) {
@@ -102,10 +114,13 @@ const WeatherDashboard = () => {
       });
   };
 
+  // Function to fetch forecast data by city name
   const fetchForecastDataByCity = () => {
+    // Constructing the API URL for fetching forecast data by city name
     const API_KEY = "ccbd99297a4de0687d0b9087f218d0b9";
     const API_URL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
 
+    // Fetching forecast data from the API
     fetch(API_URL)
       .then((response) => {
         if (!response.ok) {
@@ -121,6 +136,7 @@ const WeatherDashboard = () => {
       });
   };
 
+  // Function to get the day of the week from a timestamp
   const getDayOfWeek = (timestamp) => {
     const days = [
       "Sunday",
@@ -135,6 +151,7 @@ const WeatherDashboard = () => {
     return days[date.getDay()];
   };
 
+  // Function to get unique days from forecast data
   const getUniqueDays = () => {
     if (!forecastData || !forecastData.list) return [];
     const uniqueDays = {};
@@ -144,6 +161,8 @@ const WeatherDashboard = () => {
     });
     return Object.values(uniqueDays);
   };
+
+  // Function to get the current day and time
   const getCurrentDay = () => {
     const days = [
       "Sunday",
@@ -161,14 +180,20 @@ const WeatherDashboard = () => {
     return `${dayOfWeek}, ${hours}:${minutes}`;
   };
 
+  // Logging weather data for debugging purposes
   console.log(weatherData);
+
   return (
     <div className="weather-dashboard">
       <div className="search-container">
+        {/* Display loading message if data is being loaded */}
         {isLoading && <p className="loading-message">Loading...</p>}
+        {/* Display error message if there's an error */}
         {error && <p className="error-message">Error: {error}</p>}
+        {/* Display weather data if available */}
         {weatherData && (
           <div className="current-weather">
+            {/* Weather search input */}
             <h1 className="dashboard-heading">Weather Dashboard</h1>
             <input
               type="text"
@@ -177,10 +202,12 @@ const WeatherDashboard = () => {
               onChange={(e) => setCity(e.target.value)}
               className="city-input"
             />
+            {/* Button to trigger city search */}
             <button onClick={handleSearch} className="search-button">
               Search
             </button>
 
+            {/* Display current weather information */}
             <h1 className="section-heading">Current weather</h1>
             <img
               src={require(`../images/${weatherData.weather[0].description}.png`)}
@@ -208,10 +235,11 @@ const WeatherDashboard = () => {
             <p className="weather-info">
               Description: {weatherData.weather[0].description}
             </p>
+            {/* Display humidity, wind, and pressure */}
             <div className="weather-contain">
               <div>
                 <p style={{ display: "inline-block" }}>
-                  Hummidity: {weatherData.main.humidity}{" "}
+                  Humidity: {weatherData.main.humidity}{" "}
                 </p>
                 <img
                   src={require("../images/humidity.png")}
@@ -233,7 +261,7 @@ const WeatherDashboard = () => {
               </div>
               <div>
                 <p style={{ display: "inline-block" }}>
-                  Presure: {weatherData.main.pressure}{" "}
+                  Pressure: {weatherData.main.pressure}{" "}
                 </p>
                 <img
                   src={require("../images/air.png")}
@@ -243,17 +271,18 @@ const WeatherDashboard = () => {
                 ></img>
               </div>
             </div>
+            {/* Display current day and time */}
             <p className="weather-info">Time: {getCurrentDay()}</p>
-
-            {/* Display other weather data properties */}
           </div>
         )}
       </div>
 
+      {/* Display forecast data if available */}
       {forecastData && (
         <div className="forecastData">
           <h2 className="section-heading">FORECAST</h2>
           <div className="forecast-container">
+            {/* Map through unique forecast days and display forecast items */}
             {getUniqueDays().map((item, index) => (
               <div key={index} className="forecast-item">
                 <img
@@ -262,7 +291,7 @@ const WeatherDashboard = () => {
                   width={"30%"}
                   height={"30%"}
                 ></img>
-
+                {/* Display day, temperature, and description */}
                 <p>{getDayOfWeek(item.dt)}</p>
                 <p>Temperature: {item.main.temp}°C</p>
                 <p>Description: {item.weather[0].description}</p>

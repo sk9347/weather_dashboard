@@ -1,90 +1,121 @@
+/* Styles for the weather dashboard container */
 .weather-dashboard {
-    /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
-    /* background-image: url('../images/animated-pictures-of-the-sun-26.gif'); */
-    background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-    background-size: cover;
-    padding: 20px;
-    border-radius: 10px;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-wrap: wrap;
-    
-    text-align: center;
-    
-  }
-  
-  .dashboard-heading {
-    font-size: 24px;
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  ); /* Background gradient */
+  background-size: cover;
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%; /* Fill parent height */
+  width: 100%; /* Fill parent width */
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
 
+/* Heading style for the dashboard */
+.dashboard-heading {
+  font-size: 24px;
+}
 
-  }
-  
-  .search-container {
-    margin-bottom: 20px;
-    /* border: 1px solid white; */
-    border-radius: 10px;
-    padding: 0% 3% 0% 3%;
-    width: 45%;
-  }
-  
-  .city-input {
-    padding: 8px;
-    margin-right: 10px;
-    border-radius: 5px;
-  }
-  
-  .search-button {
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .section-heading {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-  
-  .weather-info {
-    margin-bottom: 10px;
-  }
-  
-  .loading-message,
-  .error-message {
-    font-style: italic;
-    color: #ff0000;
-  }
-  
-  
+/* Styles for the search container */
+.search-container {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 0% 3% 0% 3%; /* Padding for inner elements */
+  width: 45%; /* Width of search container */
+}
 
-  .current-weather{
-    width:80%;
-    padding: 0% 4% 0% 4%; 
-    border: 1px solid white;
-    border-radius: 10px;
-    margin: 0% 2% 0% 2%;
-    background: rgb(255,243,0);
-background: linear-gradient(90deg, rgba(255,243,0,1) 0%, rgba(235,244,245,1) 0%, rgba(251,255,219,1) 70%);
-    
-  }
-  .forecast-container{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    column-gap: 1em;
-    row-gap: 1em;
-    
-  }
+/* Styles for the city input field */
+.city-input {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
 
-  .forecast-item{
-    display: inline-block;
-    padding: 1em;
-    /* border: 1px solid black; */
-    background-color: whitesmoke;
-    border-radius:10px;
+/* Styles for the search button */
+.search-button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Heading style for sections */
+.section-heading {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/* Styles for weather information */
+.weather-info {
+  margin-bottom: 10px;
+}
+
+/* Styles for loading and error messages */
+.loading-message,
+.error-message {
+  font-style: italic;
+  color: #ff0000;
+}
+
+/* Styles for the current weather section */
+.current-weather {
+  width: 80%; /* Width of current weather container */
+  padding: 0% 4% 0% 4%; /* Padding for inner elements */
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 0% 0% 0% 2%; /* Margin for positioning */
+  background: rgb(255, 243, 0); /* Fallback background */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 243, 0, 1) 0%,
+    rgba(235, 244, 245, 1) 0%,
+    rgba(251, 255, 219, 1) 70%
+  ); /* Gradient background */
+}
+
+/* Styles for the forecast container */
+.forecast-container {
+  display: grid;
+  grid-template-columns: auto auto auto; /* Grid layout for forecast items */
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+/* Styles for individual forecast items */
+.forecast-item {
+  display: inline-block;
+  padding: 1em;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
+/* Styles for the container of weather information */
+.weather-contain {
+  display: flex;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width:480px) {
+  .weather-dashboard{
+    flex-direction: column; /* Change flex direction for smaller screens */
   }
-  .weather-contain{
-    display: flex;
+  .search-container{
+    width: 90%; /* Adjust width of search container for smaller screens */
   }
+}
