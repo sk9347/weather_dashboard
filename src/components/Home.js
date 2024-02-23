@@ -12,6 +12,7 @@ const WeatherDashboard = () => {
   useEffect(() => {
     // Fetch weather data for the current location when the component mounts
     fetchCurrentLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Function to fetch weather data for the current location using geolocation
