@@ -188,7 +188,11 @@ const WeatherDashboard = () => {
     <div className="weather-dashboard">
       <div className="search-container">
         {/* Display loading message if data is being loaded */}
-        {isLoading && <p className="loading-message">Loading...</p>}
+        {isLoading && 
+        <div style={{width:"100vw",height:"100vh",display:"flex",justifyContent:"center",alignItems:"center"}}>
+           <h1 className="loading-message">Loading...</h1>
+        </div>
+        }
         {/* Display error message if there's an error */}
         {error && <p className="error-message">Error: {error}</p>}
         {/* Display weather data if available */}
